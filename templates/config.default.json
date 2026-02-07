@@ -4,5 +4,19 @@
   "phaseEnforcement": "soft",
   "activeRoster": ["fury", "ironman", "spiderman", "thor", "cap", "thanos"],
   "mission": null,
-  "currentPhase": "briefing"
+  "currentPhase": "briefing",
+  "selfDriving": {
+    "enabled": false,
+    "errorBudget": 0.05,
+    "taskTarget": { "min": 20, "max": 50 },
+    "handoffEnforcement": "warn",
+    "freshnessInterval": 10,
+    "metricsTracking": true
+  },
+  "fileOwnership": {
+    "ironman": ["architecture/", "*.config.*", "interfaces/"],
+    "spiderman": ["src/frontend/", "src/components/", "src/ui/"],
+    "thor": ["src/backend/", "src/api/", "src/db/", "infrastructure/"],
+    "thanos": ["tests/", "*.test.*", "*.spec.*"]
+  }
 }

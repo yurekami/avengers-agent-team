@@ -85,6 +85,8 @@ Nick Fury takes command, asks about your mission, and deploys the right agents.
 | `/avengers-agent-team:disassemble` | End the session cleanly |
 | `/avengers-agent-team:setup` | First-time setup |
 | `/avengers-agent-team:help` | Full usage guide |
+| `/avengers-agent-team:self-drive` | Activate Self-Driving Mode |
+| `/avengers-agent-team:handoff` | View handoff history & metrics |
 
 ---
 
@@ -103,6 +105,66 @@ Thanos runs full integration tests and security audit. Iron Man conducts archite
 
 ### Phase 4: Endgame Deploy
 Thor configures infrastructure. Spider-Man optimizes builds. Captain America validates mission achievement. Thanos does final security audit. Nick Fury approves deployment.
+
+---
+
+## Self-Driving Mode
+
+> *"There was an idea... to build a system that could drive itself."*
+
+Inspired by [Cursor's "Towards Self-Driving Codebases"](https://cursor.com/blog/towards-self-driving-codebases) (Feb 2026), this mode transforms the Avengers into a continuous autonomous system capable of sustained high-throughput development.
+
+### Activate
+
+```
+/avengers-agent-team:self-drive
+```
+
+### Key Principles
+
+| Principle | Implementation |
+|-----------|---------------|
+| **Planner never codes** | Fury has no Write/Edit tools - only delegates, reviews, plans |
+| **Structured handoffs** | Workers report DONE, TESTS, CONCERNS, DEVIATED, DISCOVERED, NEXT |
+| **Constraints > instructions** | "No TODOs" beats "remember to finish" |
+| **File ownership** | Each agent owns specific file domains - no cross-domain edits |
+| **Error budget** | Accept ~5% error rate for throughput; Thanos tracks and reports |
+| **Freshness** | Fury rewrites task descriptions every 10 completions |
+| **Concrete quantities** | 20-50 tasks per mission, not "some tasks" |
+
+### How It Works
+
+1. **Fury creates 20-50 specific tasks** with clear deliverables, acceptance criteria, and file scope
+2. **Workers execute and handoff** - structured reports flow back to Fury
+3. **Fury processes handoffs immediately** - creates follow-up tasks, routes to next agent
+4. **Thanos validates quality** - tracks error budget, accepts 95% correct for throughput
+5. **Cap guards alignment** - broadcasts only when mission drift exceeds threshold
+6. **System runs continuously** until mission complete or user stops
+
+### File Ownership
+
+| Agent | Owned Files |
+|-------|------------|
+| Iron Man | `architecture/`, `*.config.*`, `interfaces/` |
+| Spider-Man | `src/frontend/`, `src/components/`, `src/ui/` |
+| Thor | `src/backend/`, `src/api/`, `src/db/`, `infrastructure/` |
+| Thanos | `tests/`, `*.test.*`, `*.spec.*` |
+
+### Handoff Format
+
+Every worker must provide this report upon task completion:
+
+```
+TASK: [exact task name]
+DONE: [specific files and changes]
+TESTS: [count, coverage %, what's tested]
+CONCERNS: [risks and tech debt - never empty]
+DEVIATED: [departures from spec and why]
+DISCOVERED: [unexpected findings - never empty]
+NEXT: [follow-up suggestions]
+```
+
+View handoff history anytime with `/avengers-agent-team:handoff`.
 
 ---
 
@@ -142,6 +204,7 @@ Project config > Global config > Plugin defaults
 - **Expandable Roster** - Add new Marvel characters with custom roles
 - **Project Templates** - Roles adapt to web apps, CLI tools, data pipelines, or mobile apps
 - **Hybrid Dependencies** - Task graph for planned work + Teammate messages for dynamic coordination
+- **Self-Driving Mode** - Continuous autonomous development with structured handoffs, file ownership, and error budgets
 
 ---
 

@@ -20,6 +20,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/handoff-validator.js\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [
