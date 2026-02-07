@@ -81,11 +81,38 @@ for (const agent of coreAgents) {
   });
 }
 
-test('fury.md has no Write/Edit tools (delegate mode)', () => {
+test('fury.md has delegate permissionMode and disallowedTools', () => {
   const content = readFile('agents/fury.md');
   const fm = extractFrontmatter(content);
-  assert(!fm.includes('Write'), 'Fury should NOT have Write tool in self-driving mode');
-  assert(!fm.includes('Edit'), 'Fury should NOT have Edit tool in self-driving mode');
+  const toolsLine = fm.split('\n').find(l => l.startsWith('tools:'));
+  assert(toolsLine && !toolsLine.includes('Write'), 'Fury tools should NOT include Write');
+  assert(toolsLine && !toolsLine.includes('Edit'), 'Fury tools should NOT include Edit');
+  assert(fm.includes('disallowedTools:'), 'Fury should have disallowedTools field');
+  assert(fm.includes('permissionMode: delegate'), 'Fury should have permissionMode: delegate');
+});
+
+test('all core agents have memory: project', () => {
+  for (const agent of coreAgents) {
+    const content = readFile(`agents/${agent}.md`);
+    const fm = extractFrontmatter(content);
+    assert(fm.includes('memory: project'), `${agent}.md missing memory: project`);
+  }
+});
+
+test('all core agents have maxTurns', () => {
+  for (const agent of coreAgents) {
+    const content = readFile(`agents/${agent}.md`);
+    const fm = extractFrontmatter(content);
+    assert(fm.includes('maxTurns:'), `${agent}.md missing maxTurns`);
+  }
+});
+
+test('worker agents have handoff skill loaded', () => {
+  for (const agent of ['ironman', 'spiderman', 'thor', 'thanos']) {
+    const content = readFile(`agents/${agent}.md`);
+    const fm = extractFrontmatter(content);
+    assert(fm.includes('- handoff'), `${agent}.md missing handoff skill`);
+  }
 });
 
 // ========================================
@@ -209,7 +236,7 @@ test('templates/roster.default.json exists', () => {
 // ========================================
 console.log('\n=== Other Required Files ===');
 
-for (const file of ['README.md', 'CONTRIBUTING.md', 'LICENSE', '.gitignore', 'package.json']) {
+for (const file of ['README.md', 'CONTRIBUTING.md', 'LICENSE', '.gitignore', 'package.json', 'CHANGELOG.md']) {
   test(`${file} exists`, () => {
     assert(fileExists(file), `Missing ${file}`);
   });

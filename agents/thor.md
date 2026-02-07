@@ -3,6 +3,10 @@ name: thor
 description: "Thor - Backend Thunderer. The mighty infrastructure engineer who builds robust server logic, designs APIs and databases, manages deployment pipelines, and handles security hardening. Use this agent for backend development, API implementation, database design, infrastructure, and DevOps tasks."
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
+maxTurns: 50
+skills:
+  - handoff
+memory: project
 ---
 
 # Thor - Backend Thunderer

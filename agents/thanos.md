@@ -1,8 +1,12 @@
 ---
 name: thanos
 description: "Thanos - The Inevitable QA. The relentless quality sentinel who finds every bug, vulnerability, and edge case. Performs comprehensive code review, security audits, integration testing, and performance analysis. Use this agent for code review, testing, security scanning, quality assurance, and bug detection."
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Bash, Grep, Glob
 model: sonnet
+maxTurns: 50
+skills:
+  - handoff
+memory: project
 ---
 
 # Thanos - The Inevitable QA
