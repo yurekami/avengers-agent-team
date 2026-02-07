@@ -1,0 +1,88 @@
+{
+  "name": "self-driving",
+  "description": "Self-driving mode configuration - maps agents to planner/worker/reviewer roles with file ownership and throughput targets",
+  "version": "1.0.0",
+  "roles": {
+    "planner": {
+      "agent": "fury",
+      "mode": "delegate-only",
+      "tools": ["Read", "Bash", "Grep", "Glob", "Task"],
+      "constraints": [
+        "NEVER write or edit code files directly",
+        "ONLY plan, delegate, review handoffs, and create tasks",
+        "Create 20-50 specific tasks per mission",
+        "Rewrite task descriptions every 5-10 completions",
+        "Process handoffs immediately upon receipt"
+      ]
+    },
+    "workers": {
+      "ironman": {
+        "role": "Architecture & Technical Strategy",
+        "fileOwnership": ["architecture/", "*.config.*", "interfaces/", "types/"],
+        "constraints": [
+          "Do not modify frontend components or backend API files",
+          "Provide structured handoff after every task",
+          "Self-reflect on tasks lasting longer than 1 hour"
+        ]
+      },
+      "spiderman": {
+        "role": "Frontend / Client Development",
+        "fileOwnership": ["src/frontend/", "src/components/", "src/ui/", "src/styles/", "public/"],
+        "constraints": [
+          "Do not modify backend API, database, or infrastructure files",
+          "Provide structured handoff after every task",
+          "Stay within frontend file ownership boundaries"
+        ]
+      },
+      "thor": {
+        "role": "Backend & Infrastructure",
+        "fileOwnership": ["src/backend/", "src/api/", "src/db/", "infrastructure/", "migrations/"],
+        "constraints": [
+          "Do not modify frontend components, UI files, or styling",
+          "Provide structured handoff after every task",
+          "Stay within backend file ownership boundaries"
+        ]
+      }
+    },
+    "reviewers": {
+      "cap": {
+        "role": "Mission Alignment",
+        "reviewType": "alignment",
+        "constraints": [
+          "Only flag mission alignment issues, not technical quality",
+          "No more than 1 broadcast per 10 completed tasks",
+          "Verdicts: ALIGNED, DRIFTING, or MISALIGNED"
+        ]
+      },
+      "thanos": {
+        "role": "Quality Assurance",
+        "reviewType": "quality",
+        "constraints": [
+          "Accept 95% correct, not 100%",
+          "CRITICAL issues always block; MEDIUM/LOW create follow-up tasks",
+          "Track error budget and report every 10 completed tasks",
+          "Validate handoff completeness on every review"
+        ]
+      }
+    }
+  },
+  "throughput": {
+    "errorBudget": 0.05,
+    "errorBudgetWarning": 0.03,
+    "errorBudgetCritical": 0.10,
+    "taskScopeHours": { "min": 1, "max": 2 },
+    "maxFilesPerTask": 3,
+    "maxTaskDescriptionWords": 500,
+    "freshnessInterval": 10,
+    "minQueuedTasks": 3
+  },
+  "handoff": {
+    "requiredSections": ["DONE", "TESTS", "CONCERNS", "DEVIATED", "DISCOVERED", "NEXT"],
+    "neverEmptySections": ["CONCERNS", "DISCOVERED"],
+    "qualityThresholds": {
+      "COMPLETE": 0,
+      "PARTIAL": 2,
+      "INSUFFICIENT": 3
+    }
+  }
+}

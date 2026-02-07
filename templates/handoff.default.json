@@ -1,0 +1,73 @@
+{
+  "name": "handoff-default",
+  "description": "Default handoff format template defining required sections and per-agent customizations",
+  "version": "1.0.0",
+  "format": {
+    "sections": [
+      {
+        "name": "TASK",
+        "description": "Exact task name from assignment",
+        "required": true,
+        "canBeEmpty": false
+      },
+      {
+        "name": "DONE",
+        "description": "What was implemented - specific files, functions, behaviors changed",
+        "required": true,
+        "canBeEmpty": false
+      },
+      {
+        "name": "TESTS",
+        "description": "Test count, coverage percentage, what is tested",
+        "required": true,
+        "canBeEmpty": false
+      },
+      {
+        "name": "CONCERNS",
+        "description": "Risks, fragile areas, tech debt introduced. Even 'none observed' is valid but must not be empty",
+        "required": true,
+        "canBeEmpty": false
+      },
+      {
+        "name": "DEVIATED",
+        "description": "Any departures from task spec and WHY. 'None' if exact match",
+        "required": true,
+        "canBeEmpty": true
+      },
+      {
+        "name": "DISCOVERED",
+        "description": "Unexpected findings about codebase, dependencies, or patterns. Must not be empty",
+        "required": true,
+        "canBeEmpty": false
+      },
+      {
+        "name": "NEXT",
+        "description": "What should happen next - specific follow-up suggestions",
+        "required": true,
+        "canBeEmpty": false
+      }
+    ]
+  },
+  "agentCustomizations": {
+    "ironman": {
+      "focusAreas": ["architecture concerns", "design pattern violations", "scalability risks"],
+      "concernPriority": "architectural-impact"
+    },
+    "spiderman": {
+      "focusAreas": ["accessibility issues", "performance regressions", "cross-browser compatibility"],
+      "concernPriority": "user-experience"
+    },
+    "thor": {
+      "focusAreas": ["security vulnerabilities", "performance bottlenecks", "data integrity risks"],
+      "concernPriority": "system-reliability"
+    }
+  },
+  "constraints": [
+    "No TODOs or incomplete implementations",
+    "No commented-out code",
+    "No placeholder functions",
+    "All code must pass existing tests",
+    "Do NOT modify files outside ownership scope",
+    "If cross-domain change needed, note in NEXT section"
+  ]
+}

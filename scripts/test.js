@@ -81,6 +81,13 @@ for (const agent of coreAgents) {
   });
 }
 
+test('fury.md has no Write/Edit tools (delegate mode)', () => {
+  const content = readFile('agents/fury.md');
+  const fm = extractFrontmatter(content);
+  assert(!fm.includes('Write'), 'Fury should NOT have Write tool in self-driving mode');
+  assert(!fm.includes('Edit'), 'Fury should NOT have Edit tool in self-driving mode');
+});
+
 // ========================================
 console.log('\n=== Expansion Agents (6) ===');
 
@@ -95,11 +102,12 @@ for (const agent of expansionAgents) {
 }
 
 // ========================================
-console.log('\n=== Skills (10) ===');
+console.log('\n=== Skills (12) ===');
 
 const skills = [
   'assemble', 'init', 'phase', 'status', 'roster',
-  'mission', 'debrief', 'disassemble', 'setup', 'help'
+  'mission', 'debrief', 'disassemble', 'setup', 'help',
+  'self-drive', 'handoff'
 ];
 
 for (const skill of skills) {
@@ -126,7 +134,7 @@ test('hooks/hooks.json exists and is valid', () => {
 // ========================================
 console.log('\n=== Scripts ===');
 
-const requiredScripts = ['session-start.js', 'agent-complete.js', 'session-check.js'];
+const requiredScripts = ['session-start.js', 'agent-complete.js', 'session-check.js', 'handoff-validator.js'];
 
 for (const script of requiredScripts) {
   test(`scripts/${script} exists and has valid syntax`, () => {
@@ -152,6 +160,21 @@ for (const tmpl of templates) {
 }
 
 // ========================================
+console.log('\n=== Self-Driving Templates ===');
+
+test('templates/self-driving.json exists and is valid', () => {
+  assert(fileExists('templates/self-driving.json'), 'Missing templates/self-driving.json');
+  const config = readJSON('templates/self-driving.json');
+  assert(config.name === 'self-driving', `Expected name "self-driving", got "${config.name}"`);
+});
+
+test('templates/handoff.default.json exists and is valid', () => {
+  assert(fileExists('templates/handoff.default.json'), 'Missing templates/handoff.default.json');
+  const config = readJSON('templates/handoff.default.json');
+  assert(config.format && config.format.sections, 'Handoff template missing format.sections definition');
+});
+
+// ========================================
 console.log('\n=== Default Configs ===');
 
 test('templates/config.default.json exists', () => {
@@ -159,6 +182,21 @@ test('templates/config.default.json exists', () => {
   const config = readJSON('templates/config.default.json');
   assert(config.activeRoster, 'Config missing activeRoster');
   assert(config.activeRoster.length === 6, `Expected 6 agents in roster, got ${config.activeRoster.length}`);
+});
+
+test('templates/config.default.json has selfDriving section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.selfDriving, 'Config missing selfDriving section');
+  assert(config.selfDriving.errorBudget !== undefined, 'selfDriving missing errorBudget');
+  assert(config.selfDriving.taskTarget, 'selfDriving missing taskTarget');
+});
+
+test('templates/config.default.json has fileOwnership section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.fileOwnership, 'Config missing fileOwnership section');
+  for (const agent of ['ironman', 'spiderman', 'thor', 'thanos']) {
+    assert(config.fileOwnership[agent], `fileOwnership missing ${agent}`);
+  }
 });
 
 test('templates/roster.default.json exists', () => {
