@@ -1,0 +1,8 @@
+{
+  "team": "avengers",
+  "projectType": "web-app",
+  "phaseEnforcement": "soft",
+  "activeRoster": ["fury", "ironman", "spiderman", "thor", "cap", "thanos"],
+  "mission": null,
+  "currentPhase": "briefing"
+}

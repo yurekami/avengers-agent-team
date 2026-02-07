@@ -1,0 +1,23 @@
+{
+  "name": "avengers-agent-team",
+  "version": "1.0.0",
+  "description": "Marvel Avengers-themed multi-agent orchestration plugin for Claude Code",
+  "author": "yurekami",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yurekami/avengers-agent-team.git"
+  },
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "agent-teams",
+    "multi-agent",
+    "marvel",
+    "avengers",
+    "orchestration"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

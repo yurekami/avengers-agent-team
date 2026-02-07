@@ -1,0 +1,13 @@
+{
+  "name": "cli-tool",
+  "description": "Command-line interface tool project",
+  "phases": ["briefing", "build", "test", "deploy"],
+  "roleMapping": {
+    "fury": "Project Director - Coordinates CLI design and core implementation workflows",
+    "ironman": "CLI Architect - Command structure, plugin system, configuration management, extensibility",
+    "spiderman": "CLI Interface/UX - User interaction design, help text, output formatting, prompts, progress indicators",
+    "thor": "Core Logic/IO - File I/O, process management, system integration, streams, networking",
+    "cap": "User Advocate - CLI ergonomics, documentation quality, developer experience, backward compatibility",
+    "thanos": "QA Lead - Cross-platform testing, edge case coverage, error handling, stdin/stdout validation"
+  }
+}

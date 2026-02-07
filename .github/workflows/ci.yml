@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Validate plugin structure
+        run: |
+          echo "Validating plugin manifest..."
+          test -f .claude-plugin/plugin.json
+          node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json', 'utf8'))"
+          echo "Plugin manifest is valid JSON"
+
+      - name: Validate agent definitions
+        run: |
+          echo "Checking agent files..."
+          for f in agents/*.md; do
+            echo "  Validating $f"
+            head -1 "$f" | grep -q "^---" || (echo "Missing frontmatter in $f" && exit 1)
+          done
+          echo "All agent definitions have frontmatter"
+
+      - name: Validate skill definitions
+        run: |
+          echo "Checking skill files..."
+          for d in skills/*/; do
+            test -f "${d}SKILL.md" || (echo "Missing SKILL.md in $d" && exit 1)
+            head -1 "${d}SKILL.md" | grep -q "^---" || (echo "Missing frontmatter in ${d}SKILL.md" && exit 1)
+          done
+          echo "All skill definitions valid"
+
+      - name: Validate hooks
+        run: |
+          echo "Validating hooks..."
+          node -e "JSON.parse(require('fs').readFileSync('hooks/hooks.json', 'utf8'))"
+          echo "Hooks JSON is valid"
+
+      - name: Validate scripts
+        run: |
+          echo "Checking scripts syntax..."
+          for f in scripts/*.js; do
+            node --check "$f"
+            echo "  $f - syntax OK"
+          done
+
+      - name: Validate templates
+        run: |
+          echo "Validating templates..."
+          for f in templates/*.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f', 'utf8'))"
+            echo "  $f - valid JSON"
+          done
+
+      - name: Run tests
+        run: |
+          node scripts/test.js
+
+      - name: Count files
+        run: |
+          echo "=== Plugin Summary ==="
+          echo "Agents: $(ls agents/*.md 2>/dev/null | wc -l) core + $(ls agents/expansions/*.md 2>/dev/null | wc -l) expansion"
+          echo "Skills: $(ls skills/*/SKILL.md 2>/dev/null | wc -l)"
+          echo "Templates: $(ls templates/*.json 2>/dev/null | wc -l)"
+          echo "Scripts: $(ls scripts/*.js 2>/dev/null | wc -l)"

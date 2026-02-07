@@ -1,0 +1,13 @@
+{
+  "name": "mobile-app",
+  "description": "Mobile application project (iOS/Android/cross-platform)",
+  "phases": ["briefing", "build", "test", "deploy"],
+  "roleMapping": {
+    "fury": "Project Director - Coordinates mobile and API development, manages release cycles",
+    "ironman": "Mobile Architect - App architecture, state management, offline sync, navigation patterns",
+    "spiderman": "Mobile UI Developer - Native UI components, animations, gestures, accessibility, responsive layouts",
+    "thor": "API Backend Developer - REST/GraphQL APIs, push notifications, authentication, real-time sync",
+    "cap": "Product Owner - User experience quality, app store strategy, feature scope, platform guidelines",
+    "thanos": "QA Lead - Device testing matrix, performance profiling, security audit, crash monitoring"
+  }
+}

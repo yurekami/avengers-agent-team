@@ -1,0 +1,13 @@
+{
+  "name": "data-pipeline",
+  "description": "Data processing and ETL pipeline project",
+  "phases": ["briefing", "build", "test", "deploy"],
+  "roleMapping": {
+    "fury": "Pipeline Director - Coordinates ETL stages, manages data flow dependencies and scheduling",
+    "ironman": "Data Architect - Schema design, pipeline topology, optimization strategies, data modeling",
+    "spiderman": "Data Viz/Reporting - Dashboards, reports, data presentation, monitoring interfaces",
+    "thor": "Pipeline/ETL Engineer - Data ingestion, transformation, loading, stream processing, batch jobs",
+    "cap": "Data Governance - Quality standards, compliance, data integrity, lineage tracking, documentation",
+    "thanos": "QA Lead - Data validation, reconciliation testing, monitoring, anomaly detection, performance"
+  }
+}

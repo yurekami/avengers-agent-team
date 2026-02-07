@@ -1,0 +1,13 @@
+{
+  "name": "avengers-agent-team",
+  "version": "1.0.0",
+  "description": "Marvel Avengers-themed multi-agent orchestration for Claude Code. Assemble Earth's Mightiest Developers.",
+  "author": {
+    "name": "yurekami",
+    "url": "https://github.com/yurekami"
+  },
+  "homepage": "https://github.com/yurekami/avengers-agent-team",
+  "repository": "https://github.com/yurekami/avengers-agent-team",
+  "license": "MIT",
+  "keywords": ["agents", "team", "marvel", "avengers", "orchestration", "multi-agent"]
+}

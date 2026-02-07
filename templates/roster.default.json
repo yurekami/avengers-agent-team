@@ -1,0 +1,78 @@
+{
+  "core": {
+    "fury": {
+      "name": "Nick Fury",
+      "character": "Nick Fury",
+      "role": "Director & Orchestrator",
+      "model": "opus",
+      "status": "idle"
+    },
+    "ironman": {
+      "name": "Tony Stark",
+      "character": "Iron Man",
+      "role": "Architecture Genius",
+      "model": "sonnet",
+      "status": "idle"
+    },
+    "spiderman": {
+      "name": "Peter Parker",
+      "character": "Spider-Man",
+      "role": "Frontend Developer",
+      "model": "sonnet",
+      "status": "idle"
+    },
+    "thor": {
+      "name": "Thor Odinson",
+      "character": "Thor",
+      "role": "Backend Thunderer",
+      "model": "sonnet",
+      "status": "idle"
+    },
+    "cap": {
+      "name": "Steve Rogers",
+      "character": "Captain America",
+      "role": "North Star Keeper",
+      "model": "sonnet",
+      "status": "idle"
+    },
+    "thanos": {
+      "name": "Thanos",
+      "character": "Thanos",
+      "role": "The Inevitable QA",
+      "model": "sonnet",
+      "status": "idle"
+    }
+  },
+  "expansions": {
+    "widow": {
+      "name": "Natasha Romanoff",
+      "character": "Black Widow",
+      "role": "Security Specialist"
+    },
+    "hulk": {
+      "name": "Bruce Banner",
+      "character": "Hulk",
+      "role": "Load Testing & Performance"
+    },
+    "hawkeye": {
+      "name": "Clint Barton",
+      "character": "Hawkeye",
+      "role": "Precision Debugger"
+    },
+    "strange": {
+      "name": "Stephen Strange",
+      "character": "Doctor Strange",
+      "role": "Incident Response & Rollback"
+    },
+    "panther": {
+      "name": "T'Challa",
+      "character": "Black Panther",
+      "role": "DevOps & Resource Management"
+    },
+    "wanda": {
+      "name": "Wanda Maximoff",
+      "character": "Scarlet Witch",
+      "role": "Data/ML Specialist"
+    }
+  }
+}

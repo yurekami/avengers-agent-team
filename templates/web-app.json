@@ -1,0 +1,13 @@
+{
+  "name": "web-app",
+  "description": "Full-stack web application project",
+  "phases": ["briefing", "build", "test", "deploy"],
+  "roleMapping": {
+    "fury": "Project Director - Coordinates frontend/backend integration, manages sprint priorities",
+    "ironman": "System Architect - Designs API contracts, data models, tech stack selection, code review",
+    "spiderman": "Frontend Developer - React/Vue/Angular components, responsive design, accessibility, state management",
+    "thor": "Backend Developer - REST/GraphQL APIs, database design, server infrastructure, authentication",
+    "cap": "Product Owner - User value alignment, feature prioritization, scope management, acceptance criteria",
+    "thanos": "QA Lead - E2E testing, security audit, performance benchmarks, cross-browser testing"
+  }
+}
