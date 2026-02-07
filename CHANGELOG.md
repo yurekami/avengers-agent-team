@@ -5,6 +5,35 @@ All notable changes to the Avengers Agent Team plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-07
+
+### Added
+- Agent-Native Engineering (ANE) transformation
+- Task Triage system (`/triage`) with Quick Strike / Solo Op / Full Assemble classification
+- Tech Lead Mode (`/tech-lead`) for human-in-the-loop autonomous workflow
+- Background Agent Workflow (`/background`) for async task execution
+- Velocity Metrics Dashboard (`/velocity`) with APM, tasks/hour, utilization tracking
+- Domain Rules Engine (`/rules`) with anti-slop enforcement per agent specialty
+- Review Queue (`/review-queue`) for managing completed agent work
+- 4 domain rule files: frontend, backend, architecture, quality
+- Triage classifier script for programmatic task classification
+- Metrics tracker hook for automatic velocity updates
+- Rules checker hook for automated anti-slop validation
+- 5 new templates: triage, velocity, review-queue, background, rules
+
+### Changed
+- Fury enhanced with ANE Protocol (APM mentality, triage routing, review management)
+- Thanos enhanced with Anti-Slop Protocol (tests as reward signal, rules compliance)
+- Self-drive skill updated with triage, velocity, and rules initialization
+- Help skill updated with 6 new commands
+- hooks.json expanded with metrics-tracker and rules-checker SubagentStop hooks
+- config.default.json expanded with triage, techLead, velocity, rules, background sections
+- test.js expanded with validation for all new files and configurations
+- README.md updated with full ANE documentation
+
+### Attribution
+- Inspired by "Agent-Native Engineering" by Andrew Pignanelli (Feb 2026)
+
 ## [1.1.0] - 2026-02-07
 
 ### Added

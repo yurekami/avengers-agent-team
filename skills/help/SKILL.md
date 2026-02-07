@@ -36,6 +36,12 @@ COMMANDS
   /disassemble       End session
   /setup             First-time setup
   /help [cmd]        This help guide
+  /triage <task>     Classify task complexity
+  /velocity          Performance dashboard
+  /tech-lead         Activate tech-lead mode
+  /review-queue      Manage review queue
+  /background <task> Background agent mission
+  /rules             Domain rules engine
 
 THE TEAM
   Fury       - Director & Orchestrator

@@ -66,6 +66,19 @@ Task(
 )
 ```
 
+### Step 2b: Initialize Triage State
+
+If triage is enabled, initialize the triage state:
+
+```json
+{
+  "lastTriage": null,
+  "history": []
+}
+```
+
+Write to `.avengers/state/triage.json`.
+
 ### Step 3: Initialize Metrics Tracking
 
 Create `.avengers/state/metrics.json`:
@@ -81,6 +94,29 @@ Create `.avengers/state/metrics.json`:
   "startTime": null
 }
 ```
+
+### Step 3b: Initialize Velocity Tracking
+
+If velocity tracking is enabled, initialize `.avengers/state/velocity.json`:
+
+```json
+{
+  "entries": [],
+  "summary": {
+    "totalTasks": 0,
+    "totalErrors": 0,
+    "startTime": null,
+    "lastUpdate": null,
+    "currentAPM": 0,
+    "currentTasksPerHour": 0,
+    "errorRate": 0
+  }
+}
+```
+
+### Step 3c: Initialize Rules Engine
+
+If rules engine is enabled, ensure domain rules are loaded and `.avengers/rules/` exists for project overrides.
 
 ### Step 4: Monitor and Report
 
@@ -101,3 +137,11 @@ Run `/avengers-agent-team:disassemble` or set `selfDriving.enabled = false` in c
 - Error rate stays within budget (< 5%)
 - No agent idle time (tasks always queued)
 - Task descriptions stay fresh (rewritten every 10 completions)
+
+## Compatible Enhancements
+
+- **Tech-Lead Mode** (`/tech-lead`): Adds human review loop on top of self-drive
+- **Background Agents** (`/background`): Enables async task execution within self-drive
+- **Velocity Tracking** (`/velocity`): Real-time APM and throughput metrics
+- **Rules Engine** (`/rules`): Automated anti-slop checking on agent output
+- **Triage** (`/triage`): Task classification before assignment

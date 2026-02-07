@@ -1,0 +1,16 @@
+{
+  "name": "rules",
+  "enforcement": "warn",
+  "domains": ["frontend", "backend", "architecture", "quality"],
+  "customRulesPath": ".avengers/rules/",
+  "autoCheck": true,
+  "severityLevels": {
+    "must": "block",
+    "should": "warn",
+    "mustNot": "block"
+  },
+  "reporting": {
+    "includeAutoDetection": true,
+    "summaryOnCompletion": true
+  }
+}

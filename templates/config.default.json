@@ -18,5 +18,30 @@
     "spiderman": ["src/frontend/", "src/components/", "src/ui/"],
     "thor": ["src/backend/", "src/api/", "src/db/", "infrastructure/"],
     "thanos": ["tests/", "*.test.*", "*.spec.*"]
+  },
+  "triage": {
+    "enabled": false,
+    "autoClassify": true,
+    "defaultLevel": "manageable"
+  },
+  "techLead": {
+    "enabled": false,
+    "reviewRequired": true,
+    "autoApproveSimple": false
+  },
+  "velocity": {
+    "enabled": false,
+    "targetAPM": 0.5,
+    "reportInterval": 10
+  },
+  "rules": {
+    "enabled": false,
+    "enforcement": "warn",
+    "domains": ["frontend", "backend", "architecture", "quality"]
+  },
+  "background": {
+    "enabled": false,
+    "maxConcurrent": 3,
+    "branchPrefix": "feat/"
   }
 }

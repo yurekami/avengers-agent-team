@@ -1,0 +1,28 @@
+{
+  "name": "velocity",
+  "targets": {
+    "apm": 0.5,
+    "tasksPerHour": 3.0,
+    "utilization": 0.75,
+    "maxErrorRate": 0.05
+  },
+  "tracking": {
+    "windowMinutes": 60,
+    "reportInterval": 10,
+    "maxEntries": 100
+  },
+  "thresholds": {
+    "healthy": {
+      "apm": { "min": 0.3 },
+      "errorRate": { "max": 0.03 }
+    },
+    "warning": {
+      "apm": { "min": 0.15 },
+      "errorRate": { "max": 0.05 }
+    },
+    "critical": {
+      "apm": { "min": 0 },
+      "errorRate": { "max": 1.0 }
+    }
+  }
+}

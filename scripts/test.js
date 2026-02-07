@@ -129,12 +129,13 @@ for (const agent of expansionAgents) {
 }
 
 // ========================================
-console.log('\n=== Skills (12) ===');
+console.log('\n=== Skills (18) ===');
 
 const skills = [
   'assemble', 'init', 'phase', 'status', 'roster',
   'mission', 'debrief', 'disassemble', 'setup', 'help',
-  'self-drive', 'handoff'
+  'self-drive', 'handoff',
+  'triage', 'velocity', 'tech-lead', 'review-queue', 'background', 'rules'
 ];
 
 for (const skill of skills) {
@@ -161,7 +162,7 @@ test('hooks/hooks.json exists and is valid', () => {
 // ========================================
 console.log('\n=== Scripts ===');
 
-const requiredScripts = ['session-start.js', 'agent-complete.js', 'session-check.js', 'handoff-validator.js'];
+const requiredScripts = ['session-start.js', 'agent-complete.js', 'session-check.js', 'handoff-validator.js', 'triage-classifier.js', 'metrics-tracker.js', 'rules-checker.js'];
 
 for (const script of requiredScripts) {
   test(`scripts/${script} exists and has valid syntax`, () => {
@@ -241,6 +242,113 @@ for (const file of ['README.md', 'CONTRIBUTING.md', 'LICENSE', '.gitignore', 'pa
     assert(fileExists(file), `Missing ${file}`);
   });
 }
+
+// ========================================
+console.log('\n=== Domain Rules (4) ===');
+
+const domainRules = ['frontend', 'backend', 'architecture', 'quality'];
+
+for (const rule of domainRules) {
+  test(`rules/${rule}.md exists with frontmatter`, () => {
+    assert(fileExists(`rules/${rule}.md`), `Missing rules/${rule}.md`);
+    const content = readFile(`rules/${rule}.md`);
+    assert(hasFrontmatter(content), `Missing YAML frontmatter in rules/${rule}.md`);
+    const fm = extractFrontmatter(content);
+    assert(fm.includes(`name: ${rule}`), `Frontmatter missing "name: ${rule}"`);
+    assert(fm.includes('appliesTo:'), `Frontmatter missing "appliesTo" in rules/${rule}.md`);
+  });
+}
+
+// ========================================
+console.log('\n=== ANE Templates ===');
+
+test('templates/triage.default.json exists and is valid', () => {
+  assert(fileExists('templates/triage.default.json'), 'Missing templates/triage.default.json');
+  const config = readJSON('templates/triage.default.json');
+  assert(config.name === 'triage', `Expected name "triage", got "${config.name}"`);
+  assert(config.levels, 'Triage template missing levels');
+  assert(config.levels.simple && config.levels.manageable && config.levels.complex, 'Triage template missing level definitions');
+});
+
+test('templates/velocity.default.json exists and is valid', () => {
+  assert(fileExists('templates/velocity.default.json'), 'Missing templates/velocity.default.json');
+  const config = readJSON('templates/velocity.default.json');
+  assert(config.name === 'velocity', `Expected name "velocity", got "${config.name}"`);
+  assert(config.targets, 'Velocity template missing targets');
+});
+
+test('templates/review-queue.default.json exists and is valid', () => {
+  assert(fileExists('templates/review-queue.default.json'), 'Missing templates/review-queue.default.json');
+  const config = readJSON('templates/review-queue.default.json');
+  assert(config.name === 'review-queue', `Expected name "review-queue", got "${config.name}"`);
+});
+
+test('templates/background.default.json exists and is valid', () => {
+  assert(fileExists('templates/background.default.json'), 'Missing templates/background.default.json');
+  const config = readJSON('templates/background.default.json');
+  assert(config.name === 'background', `Expected name "background", got "${config.name}"`);
+});
+
+test('templates/rules.default.json exists and is valid', () => {
+  assert(fileExists('templates/rules.default.json'), 'Missing templates/rules.default.json');
+  const config = readJSON('templates/rules.default.json');
+  assert(config.name === 'rules', `Expected name "rules", got "${config.name}"`);
+  assert(config.domains, 'Rules template missing domains');
+});
+
+// ========================================
+console.log('\n=== ANE Config Sections ===');
+
+test('templates/config.default.json has triage section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.triage, 'Config missing triage section');
+  assert(config.triage.enabled === false, 'triage should default to disabled');
+});
+
+test('templates/config.default.json has techLead section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.techLead, 'Config missing techLead section');
+  assert(config.techLead.enabled === false, 'techLead should default to disabled');
+});
+
+test('templates/config.default.json has velocity section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.velocity, 'Config missing velocity section');
+  assert(config.velocity.enabled === false, 'velocity should default to disabled');
+});
+
+test('templates/config.default.json has rules section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.rules, 'Config missing rules section');
+  assert(config.rules.enabled === false, 'rules should default to disabled');
+});
+
+test('templates/config.default.json has background section', () => {
+  const config = readJSON('templates/config.default.json');
+  assert(config.background, 'Config missing background section');
+  assert(config.background.enabled === false, 'background should default to disabled');
+});
+
+// ========================================
+console.log('\n=== Hook Configuration ===');
+
+test('hooks.json has metrics-tracker in SubagentStop', () => {
+  const hooks = readJSON('hooks/hooks.json');
+  const subagentStopHooks = hooks.hooks.SubagentStop || [];
+  const hasMetrics = subagentStopHooks.some(h =>
+    h.hooks && h.hooks.some(hh => hh.command && hh.command.includes('metrics-tracker'))
+  );
+  assert(hasMetrics, 'hooks.json missing metrics-tracker SubagentStop hook');
+});
+
+test('hooks.json has rules-checker in SubagentStop', () => {
+  const hooks = readJSON('hooks/hooks.json');
+  const subagentStopHooks = hooks.hooks.SubagentStop || [];
+  const hasRules = subagentStopHooks.some(h =>
+    h.hooks && h.hooks.some(hh => hh.command && hh.command.includes('rules-checker'))
+  );
+  assert(hasRules, 'hooks.json missing rules-checker SubagentStop hook');
+});
 
 // ========================================
 // Summary

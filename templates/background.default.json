@@ -1,0 +1,12 @@
+{
+  "name": "background",
+  "maxConcurrent": 3,
+  "branchPrefix": "feat/",
+  "activeMissions": [],
+  "completedMissions": [],
+  "settings": {
+    "createBranch": true,
+    "runTests": true,
+    "autoSubmitToReview": true
+  }
+}

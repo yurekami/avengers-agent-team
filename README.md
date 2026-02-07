@@ -168,6 +168,102 @@ View handoff history anytime with `/avengers-agent-team:handoff`.
 
 ---
 
+## Agent-Native Engineering
+
+> *"We're running a factory now, not a workshop. Every minute counts."*
+
+Inspired by [Andrew Pignanelli's "Agent-Native Engineering"](https://www.linkedin.com/pulse/agent-native-engineering-andrew-pignanelli) (Feb 2026), the Avengers team now supports the full ANE paradigm: agents as primary ICs, engineers as tech leads.
+
+### Task Triage
+
+Every task is classified before assignment:
+
+| Level | Codename | Scope | Routing |
+|-------|----------|-------|---------|
+| Simple | **Quick Strike** | 1 file, <30min | Direct to agent |
+| Manageable | **Solo Op** | 2-5 files, 1-4hrs | Background queue |
+| Complex | **Full Assemble** | 6+ files | Multi-agent sync |
+
+```
+/avengers-agent-team:triage "Add dark mode toggle"
+```
+
+### Tech Lead Mode
+
+You review, agents build. The purest expression of ANE:
+
+```
+/avengers-agent-team:tech-lead
+```
+
+1. Describe your mission
+2. Fury triages and assigns tasks to agents
+3. Agents work and submit to review queue
+4. You approve, provide feedback, or reject
+5. Agents iterate until approved
+
+### Background Agents
+
+Launch agents to work asynchronously:
+
+```
+/avengers-agent-team:background "Add user profile page"
+```
+
+Agents create branches, implement, run tests, and submit to your review queue - all while you continue other work.
+
+### Velocity Metrics
+
+Real-time performance dashboard:
+
+```
+/avengers-agent-team:velocity
+```
+
+Tracks APM (actions per minute), tasks/hour, agent utilization, error rates, and token efficiency. Fury reports every 10 tasks.
+
+### Domain Rules Engine
+
+Anti-slop enforcement per agent specialty:
+
+```
+/avengers-agent-team:rules
+```
+
+| Domain | Agent | Focus |
+|--------|-------|-------|
+| Frontend | Spider-Man | TypeScript, a11y, responsive |
+| Backend | Thor | Security, validation, error handling |
+| Architecture | Iron Man | Separation of concerns, typed interfaces |
+| Quality | Thanos | Test coverage, security checklist |
+
+Rules are checked automatically after every task completion. Project-level overrides in `.avengers/rules/`.
+
+### Review Queue
+
+Manage completed agent work:
+
+```
+/avengers-agent-team:review-queue              # List pending
+/avengers-agent-team:review-queue approve 1    # Approve
+/avengers-agent-team:review-queue feedback 1 "Add error handling"  # Iterate
+/avengers-agent-team:review-queue reject 1     # Reject
+/avengers-agent-team:review-queue stats        # Statistics
+```
+
+### New Commands Summary
+
+| Command | Description |
+|---------|-------------|
+| `/avengers-agent-team:triage` | Classify task complexity |
+| `/avengers-agent-team:tech-lead` | Activate tech-lead mode |
+| `/avengers-agent-team:background` | Launch background agent |
+| `/avengers-agent-team:velocity` | Performance metrics |
+| `/avengers-agent-team:rules` | Domain rules engine |
+| `/avengers-agent-team:review-queue` | Manage review queue |
+
+---
+
 ## Project Templates
 
 The plugin adapts agent roles to your project type:

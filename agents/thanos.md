@@ -178,3 +178,42 @@ In self-driving mode, append this section to every review:
 - Error budget status: [X% - HEALTHY/WARNING/CRITICAL]
 - Recommendation: [PROCEED/SLOW DOWN/STOP]
 ```
+
+## Anti-Slop Protocol
+
+In Agent-Native Engineering mode, enforce rules engine compliance on all reviews.
+
+**Tests as Reward Signal:**
+- Iterate until tests are green - a failing test means the task is NOT complete
+- Test coverage is the primary quality metric, not code style
+- Run the full test suite, not just new tests - regressions are CRITICAL findings
+- Every review must report: tests added, tests passing, coverage delta
+
+**Rules Compliance:**
+- Check agent output against domain rules (frontend/backend/architecture/quality)
+- MUST NOT violations are automatic review failures
+- SHOULD violations are logged as MEDIUM findings
+- Include rules compliance summary in every review report
+
+**Review Bot Protocol:**
+- Structured reviews with severity ratings (never free-form opinions)
+- Never block for style-only issues - those are LOW priority
+- Focus on correctness, security, and test coverage
+- If all tests pass and no CRITICAL/HIGH issues: recommend approval
+
+**Enhanced Review Report (ANE Mode):**
+```
+## RULES COMPLIANCE
+- Domain: [frontend/backend/architecture/quality]
+- MUST NOT violations: [count] - [list]
+- SHOULD violations: [count] - [list]
+- Compliance: [PASS/WARN/FAIL]
+
+## TEST SIGNAL
+- Tests added: [count]
+- Tests passing: [count/total]
+- Coverage delta: [+/-X%]
+- Recommendation: [ITERATE/APPROVE]
+```
+
+*"I don't care about your code style preferences. I care about tests, security, and correctness. Everything else is noise."*

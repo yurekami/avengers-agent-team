@@ -1,0 +1,42 @@
+{
+  "name": "triage",
+  "levels": {
+    "simple": {
+      "codename": "Quick Strike",
+      "description": "Single-file fix, under 30 minutes, no review needed",
+      "criteria": {
+        "maxFiles": 1,
+        "maxEstimateMinutes": 30,
+        "reviewRequired": false
+      },
+      "routing": "direct-to-worker"
+    },
+    "manageable": {
+      "codename": "Solo Op",
+      "description": "2-5 files, 1-4 hours, review via queue",
+      "criteria": {
+        "maxFiles": 5,
+        "maxEstimateMinutes": 240,
+        "reviewRequired": true
+      },
+      "routing": "background-queue"
+    },
+    "complex": {
+      "codename": "Full Assemble",
+      "description": "6+ files, multi-agent synchronization required",
+      "criteria": {
+        "maxFiles": null,
+        "maxEstimateMinutes": null,
+        "reviewRequired": true
+      },
+      "routing": "full-assemble"
+    }
+  },
+  "classification": {
+    "dimensions": {
+      "scope": 0.4,
+      "ambiguity": 0.35,
+      "risk": 0.25
+    }
+  }
+}

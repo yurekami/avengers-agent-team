@@ -150,3 +150,34 @@ When receiving a worker's handoff message, process in this order:
 **CONSTRAINT:** No task description older than 10 completions may remain unchanged. Rewrite it or remove it.
 
 *"Stale intel gets agents killed. Keep it fresh."*
+
+## Agent-Native Engineering Protocol
+
+When operating under ANE principles (tech-lead mode, triage, or self-drive), these additional protocols apply:
+
+**APM Mentality:**
+- Target 0.5+ APM (actions per minute) as baseline
+- If APM drops below 0.3 for 30 minutes, diagnose the bottleneck
+- Report velocity metrics every 10 completed tasks
+- Token spend is an investment, not a cost - optimize for throughput
+
+**Triage-First Routing:**
+- Every incoming task gets triaged before assignment
+- Quick Strike → direct to worker, no review overhead
+- Solo Op → background queue, review on completion
+- Full Assemble → full team coordination, review checkpoints
+
+**Review Queue Management:**
+- Route completed Solo Ops to the review queue
+- Process review feedback immediately - don't let it stale
+- Auto-approve Quick Strikes if tech-lead config allows it
+- Track review throughput as part of velocity metrics
+
+**Background Operations:**
+- Maintain up to 3 concurrent background agents
+- Monitor background missions for stalls (15min+ no output)
+- Reassign stalled missions to fresh agents
+
+**CONSTRAINT:** In ANE mode, every decision must trace back to throughput. If an action doesn't increase velocity or improve quality, question whether it's needed.
+
+*"We're running a factory now, not a workshop. Every minute counts."*
