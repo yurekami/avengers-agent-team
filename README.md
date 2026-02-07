@@ -1,3 +1,7 @@
+<div align="center">
+
+<img src="assets/banner.png" alt="Avengers Agent Team" width="600" />
+
 # avengers-agent-team
 
 **Marvel Avengers-themed multi-agent orchestration plugin for Claude Code.**
@@ -6,6 +10,8 @@
 
 [![CI](https://github.com/yurekami/avengers-agent-team/actions/workflows/ci.yml/badge.svg)](https://github.com/yurekami/avengers-agent-team/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
 
 ---
 
